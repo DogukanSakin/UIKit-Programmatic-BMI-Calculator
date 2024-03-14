@@ -30,8 +30,6 @@ extension CalculateViewController : CalculateViewDelegate {
     func calculateBMIButtonTapped(weight: Double, height: Double) {
         // TODO: Implement calculate func
     }
-    
-    
 }
 
 
