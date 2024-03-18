@@ -14,9 +14,9 @@ protocol CalculateViewDelegate:AnyObject {
 class CalculateView:UIView{
     weak var delegate:CalculateViewDelegate?
     
-    let heightSlider = CustomSlider(rightHeaderText: "Height", leftHeaderText: "180cm")
+    let heightSlider = CustomSlider(header:"Height" ,suffix: "cm",minimumValue: 120,maximumValue: 210)
     
-    let weightSlider = CustomSlider(rightHeaderText: "Weight", leftHeaderText: "80kg")
+    let weightSlider = CustomSlider(header: "Weight",suffix: "kg",minimumValue: 30,maximumValue: 200)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -48,6 +48,9 @@ class CalculateView:UIView{
         ])
         
     }
+    
+
+    
     
     
     
