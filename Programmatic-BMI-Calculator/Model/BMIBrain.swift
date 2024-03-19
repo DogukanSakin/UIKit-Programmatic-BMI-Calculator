@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct BMIBrain{
+    func calculateBMI(_ body:BodyMeasurements)->Float{
+        return body.weight / pow(body.height,2)
+    }
+    
+}

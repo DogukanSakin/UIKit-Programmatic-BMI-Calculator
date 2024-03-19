@@ -10,11 +10,13 @@ import UIKit
 class CalculateViewController : UIViewController {
 
     private var calculateView:CalculateView!
+    private let bmiBrain = BMIBrain()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCalculateView()
         view.backgroundColor = .white
+     
     }
     
     private func setupCalculateView(){
@@ -27,9 +29,17 @@ class CalculateViewController : UIViewController {
 }
 
 extension CalculateViewController : CalculateViewDelegate {
-    func calculateBMIButtonTapped(weight: Double, height: Double) {
-        // TODO: Implement calculate func
+    func calculateBMIButtonTapped(weight: Float, height: Float) {
+        let measurements = BodyMeasurements(height: height, weight: weight)
+        
+        let bmiResult = bmiBrain.calculateBMI(measurements)
+        
+        
+        let resultScreen = ResultViewController()
+        resultScreen.bmiResult = bmiResult
+        navigationController?.pushViewController(resultScreen, animated: true)
     }
+    
 }
 
 

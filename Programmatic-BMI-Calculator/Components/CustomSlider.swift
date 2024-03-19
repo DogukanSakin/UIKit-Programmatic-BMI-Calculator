@@ -10,6 +10,8 @@ import UIKit
 class CustomSlider : UIStackView {
     weak var delegate: CalculateViewDelegate?
     var suffix:String = ""
+    var convertValueLabelToInt:Bool = false
+
     
     private let slider = UISlider()
     private let headerLabel = UILabel()
@@ -18,13 +20,14 @@ class CustomSlider : UIStackView {
     
     var sliderValue:Float {
         get{
-            return self.slider.value
+            return (self.slider.value * 100).rounded() / 100
         }
     }
     
-    init(header: String,suffix:String,minimumValue:Float,maximumValue:Float) {
+    init(header: String,suffix:String,minimumValue:Float,maximumValue:Float,convertValueLabelToInt:Bool? = false) {
         super.init(frame: .zero)
         self.suffix = suffix
+        self.convertValueLabelToInt = convertValueLabelToInt!
         
         // Container
         self.addArrangedSubview(headerStackView)
@@ -47,12 +50,21 @@ class CustomSlider : UIStackView {
         self.slider.addTarget(self, action: #selector(sliderValueChanged), for: .valueChanged)
         self.slider.minimumValue = minimumValue
         self.slider.maximumValue = maximumValue
+        
 
         
     }
     
     @objc private func sliderValueChanged(_ sender:UISlider){
-        self.valueLabel.text = "\(String(Int(self.sliderValue)) + suffix)"
+        var currentValue:String
+        
+        if(convertValueLabelToInt){
+            currentValue = String(Int(self.sliderValue))
+        }else{
+            currentValue = String(format: "%.2f",self.sliderValue)
+        }
+        
+        self.valueLabel.text = "\(currentValue + suffix)"
     }
     
     required init(coder: NSCoder) {
